@@ -9,49 +9,49 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="45"/>
-        <source>OpenDataSpace</source>
+        <location filename="../assets/main.qml" line="48"/>
+        <source>ODS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="53"/>
-        <location filename="../assets/main.qml" line="57"/>
+        <location filename="../assets/main.qml" line="87"/>
+        <location filename="../assets/main.qml" line="91"/>
         <source>Select Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="65"/>
+        <location filename="../assets/main.qml" line="99"/>
         <source>Select | Capture Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="69"/>
+        <location filename="../assets/main.qml" line="103"/>
         <source>Select Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="77"/>
+        <location filename="../assets/main.qml" line="111"/>
         <source>Select | Capture Video</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="81"/>
+        <location filename="../assets/main.qml" line="115"/>
         <source>Select Video</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="89"/>
-        <location filename="../assets/main.qml" line="93"/>
+        <location filename="../assets/main.qml" line="123"/>
+        <location filename="../assets/main.qml" line="127"/>
         <source>Select Music</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="103"/>
-        <source>Upload Files to ODS</source>
+        <location filename="../assets/main.qml" line="136"/>
+        <source>Invoke ODS as Card vs App</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="111"/>
+        <location filename="../assets/main.qml" line="144"/>
         <source>[selected file]</source>
         <translation type="unfinished"></translation>
     </message>

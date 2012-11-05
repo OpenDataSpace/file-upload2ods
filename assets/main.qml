@@ -37,16 +37,50 @@ Page {
             onFileSelected: {
                 selectedFile = selectedFiles[0]
                 fileLabel.text = selectedFile
+                cloudAction.enabled = true
+                shareAction.enabled = true
             }
         }
     ]
     actions: [
         ActionItem {
-            title: qsTr("OpenDataSpace") + Retranslate.onLanguageChanged
+            id: cloudAction
+            title: qsTr("ODS") + Retranslate.onLanguageChanged
             imageSource: "asset:///images/ics/4-collections-cloud_newLabel81.png"
+            enabled: false
             ActionBar.placement: ActionBarPlacement.OnBar
             onTriggered: {
-                // TODO Bound Invocation
+                app.invokeBoundODSPreviewer(picker.selectedFile)
+            }
+        },
+        InvokeActionItem {
+            id: shareAction
+            enabled: false
+            ActionBar.placement: ActionBarPlacement.OnBar
+            query {
+                // little trick: always use same mime type, because query needs a mime type
+                // ODS then takes a look at file path suffix to see if file is supported
+                mimeType: "image/png"
+                invokeActionId: "bb.action.SHARE"
+                invokeTargetId: "io.ods.bb10.card.upload.previewer"
+            }
+            onTriggered: {
+                // next trick: all properties from query are read-only
+                // but we can use the data, which is read-write
+                data = picker.selectedFile
+            }
+        },
+        InvokeActionItem {
+            ActionBar.placement: ActionBarPlacement.OnBar
+            query {
+                // little trick: always use same mime type, because query needs a mime type
+                // ODS then takes a look at file path suffix to see if file is supported
+                mimeType: "image/png"
+                invokeActionId: "bb.action.OPEN"
+                invokeTargetId: "io.ods.bb10.invoke"
+            }
+            onTriggered: {
+                // we dont need the file - the app is only opened
             }
         },
         ActionItem {
@@ -98,20 +132,23 @@ Page {
             }
         }
     ]
-    titleBar: TitleBar {
-        id: theBar
-        title: qsTr("Upload Files to ODS")
-        visibility: ChromeVisibility.Visible
+    titleBar: {
+        title: qsTr("Invoke ODS as Card vs App") + Retranslate.onLanguageChanged
     }
     Container {
         layout: DockLayout {
         }
-        Label {
+        TextArea {
             id: fileLabel
+            editable: false
             text: qsTr("[selected file]")
             textStyle.base: SystemDefaults.TextStyles.BodyText
             verticalAlignment: VerticalAlignment.Center
             horizontalAlignment: HorizontalAlignment.Center
         }
+    }
+    onCreationCompleted: {
+        // support all orientations
+        OrientationSupport.supportedDisplayOrientation = SupportedDisplayOrientation.All;
     }
 }
