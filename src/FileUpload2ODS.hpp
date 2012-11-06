@@ -19,6 +19,7 @@
 #include <QObject>
 #include <bb/system/InvokeManager.hpp>
 #include <bb/system/InvokeRequest.hpp>
+#include <bb/system/CardDoneMessage>
 
 namespace bb {
 namespace cascades {
@@ -51,6 +52,11 @@ public:
 	 */
 	Q_INVOKABLE
 	void invokeBoundODSComposer(QString data);
+
+private Q_SLOTS:
+	// This slot updates the status message when the invocation of a card is done
+	void childCardDone(const bb::system::CardDoneMessage&);
+
 private:
 	bb::system::InvokeManager *m_invokeManager;
 

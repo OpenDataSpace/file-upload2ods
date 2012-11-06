@@ -29,34 +29,37 @@
 using namespace bb::cascades;
 using namespace bb::system;
 
-FileUpload2ODS::FileUpload2ODS(bb::cascades::Application *app)
-: QObject(app), m_invokeManager(new InvokeManager(this))
-{
+FileUpload2ODS::FileUpload2ODS(bb::cascades::Application *app) :
+		QObject(app), m_invokeManager(new InvokeManager(this)) {
 
 	// Register some classes for Filepicker for QML
-		qmlRegisterType<bb::cascades::pickers::FilePicker>("bb.cascades.pickers", 1,
-				0, "FilePicker");
-		qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerMode>(
-				"bb.cascades.pickers", 1, 0, "FilePickerMode", "");
-		qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerSortFlag>(
-				"bb.cascades.pickers", 1, 0, "FilePickerSortFlag", "");
-		qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerSortOrder>(
-				"bb.cascades.pickers", 1, 0, "FilePickerSortOrder", "");
-		qmlRegisterUncreatableType<bb::cascades::pickers::FileType>(
-				"bb.cascades.pickers", 1, 0, "FileType", "");
-		qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerViewMode>(
-				"bb.cascades.pickers", 1, 0, "FilePickerViewMode", "");
+	qmlRegisterType<bb::cascades::pickers::FilePicker>("bb.cascades.pickers", 1,
+			0, "FilePicker");
+	qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerMode>(
+			"bb.cascades.pickers", 1, 0, "FilePickerMode", "");
+	qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerSortFlag>(
+			"bb.cascades.pickers", 1, 0, "FilePickerSortFlag", "");
+	qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerSortOrder>(
+			"bb.cascades.pickers", 1, 0, "FilePickerSortOrder", "");
+	qmlRegisterUncreatableType<bb::cascades::pickers::FileType>(
+			"bb.cascades.pickers", 1, 0, "FileType", "");
+	qmlRegisterUncreatableType<bb::cascades::pickers::FilePickerViewMode>(
+			"bb.cascades.pickers", 1, 0, "FilePickerViewMode", "");
+
+	connect(m_invokeManager,
+			SIGNAL(childCardDone(const bb::system::CardDoneMessage&)), this,
+			SLOT(childCardDone(const bb::system::CardDoneMessage&)));
 
 	// create scene document from main.qml asset
-    // set parent to created document to ensure it exists for the whole application lifetime
-    QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
+	// set parent to created document to ensure it exists for the whole application lifetime
+	QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
 
-    qml->setContextProperty("app", this);
+	qml->setContextProperty("app", this);
 
-    // create root object for the UI
-    AbstractPane *root = qml->createRootObject<AbstractPane>();
-    // set created root object as a scene
-    app->setScene(root);
+	// create root object for the UI
+	AbstractPane *root = qml->createRootObject<AbstractPane>();
+	// set created root object as a scene
+	app->setScene(root);
 }
 
 void FileUpload2ODS::invokeBoundODSPreviewer(QString data) {
@@ -71,5 +74,20 @@ void FileUpload2ODS::invokeBoundODSComposer(QString data) {
 	cardRequest.setData(data.toLatin1());
 	cardRequest.setTarget("io.ods.bb10.card.upload.composer");
 	m_invokeManager->invoke(cardRequest);
+}
+
+void FileUpload2ODS::childCardDone(const bb::system::CardDoneMessage &message) {
+	qDebug() << "childCardDone";
+	if (message.reason() == "Success") {
+		qDebug() << "childCardDone with Success " << message.data();
+		return;
+	}
+	if (message.reason() == "Cancel") {
+		qDebug() << "childCardDone with Cancel: " << message.data();
+		return;
+	}
+	// now close the card !
+	qDebug() << "close the card";
+	m_invokeManager->closeChildCard();
 }
 
