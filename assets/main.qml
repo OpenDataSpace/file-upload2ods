@@ -149,6 +149,24 @@ Page {
     Container {
         layout: DockLayout {
         }
+        ImageView {
+            id: redImage
+            visible: false
+            imageSource: "asset:///images/cancel_red.png"
+            verticalAlignment: VerticalAlignment.Top
+            horizontalAlignment: HorizontalAlignment.Left
+            translationX: 10
+            translationY: 10
+        }
+        ImageView {
+            id: greenImage
+            visible: false
+            imageSource: "asset:///images/checked_green.png"
+            verticalAlignment: VerticalAlignment.Top
+            horizontalAlignment: HorizontalAlignment.Left
+            translationX: 10
+            translationY: 10
+        }
         TextArea {
             id: theNextStep
             editable: false
@@ -175,9 +193,9 @@ Page {
         theNextStep.text = qsTr("You have selected the file below.\nEmbed the card from ODS:\nCloud Action (Previewer/Composer)\nor Share Action (Previewer)") + Retranslate.onLanguageChanged
         fileLabel.text = picker.selectedFile
         fileLabel.visible = true
-        page.addAction(cloudActionPreviewer,0)
-        page.addAction(cloudActionComposer,1)
-        page.addAction(shareAction,2)
+        page.addAction(cloudActionPreviewer, 0)
+        page.addAction(cloudActionComposer, 1)
+        page.addAction(shareAction, 2)
         //cloudActionPreviewer.enabled = true
         //cloudActionComposer.enabled = true
         //shareAction.enabled = true
@@ -192,9 +210,20 @@ Page {
         //shareAction.enabled = false
         theNextStep.text = qsTr("Select a file from Overflow Menu:\n\nDocument, Image,\nVideo or Music)\n\nor invoke ODS as Application:\nOpen in... Action") + Retranslate.onLanguageChanged
     }
+    function onGreen() {
+        redImage.visible = false
+        greenImage.visible = true
+    }
+    function onRed() {
+        greenImage.visible = false
+        redImage.visible = true
+    }
     onCreationCompleted: {
         // support all orientations
         OrientationSupport.supportedDisplayOrientation = SupportedDisplayOrientation.All;
+        // connect to results
+        app.cardSuccess.connect(onGreen)
+        app.cardCanceled.connect(onRed)
         resetFields();
     }
 }

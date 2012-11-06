@@ -53,6 +53,11 @@ public:
 	Q_INVOKABLE
 	void invokeBoundODSComposer(QString data);
 
+Q_SIGNALS:
+
+	void cardSuccess();
+	void cardCanceled();
+
 private Q_SLOTS:
 	// This slot updates the status message when the invocation of a card is done
 	void childCardDone(const bb::system::CardDoneMessage&);

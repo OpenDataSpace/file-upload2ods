@@ -76,15 +76,17 @@ void FileUpload2ODS::invokeBoundODSComposer(QString data) {
 	m_invokeManager->invoke(cardRequest);
 }
 
+
+
 void FileUpload2ODS::childCardDone(const bb::system::CardDoneMessage &message) {
 	qDebug() << "childCardDone";
-	if (message.reason() == "Success") {
+	// Card Child done with Success ?
+	if (message.reason() == "save") {
 		qDebug() << "childCardDone with Success " << message.data();
-		return;
-	}
-	if (message.reason() == "Cancel") {
+		emit cardSuccess();
+	} else {
 		qDebug() << "childCardDone with Cancel: " << message.data();
-		return;
+		emit cardCanceled();
 	}
 	// now close the card !
 	qDebug() << "close the card";

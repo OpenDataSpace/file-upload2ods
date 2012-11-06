@@ -56,7 +56,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="175"/>
+        <location filename="../assets/main.qml" line="193"/>
         <source>You have selected the file below.
 Embed the card from ODS:
 Cloud Action (Previewer/Composer)
@@ -64,7 +64,7 @@ or Share Action (Previewer)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="193"/>
+        <location filename="../assets/main.qml" line="211"/>
         <source>Select a file from Overflow Menu:
 
 Document, Image,
