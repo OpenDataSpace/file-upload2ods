@@ -36,26 +36,47 @@ Page {
             sortOrder: FilePickerSortOrder.Default
             onFileSelected: {
                 selectedFile = selectedFiles[0]
-                fileLabel.text = selectedFile
-                cloudAction.enabled = true
-                shareAction.enabled = true
+                fileActions()
             }
         }
     ]
     actions: [
         ActionItem {
-            id: cloudAction
-            title: qsTr("ODS") + Retranslate.onLanguageChanged
+            id: cloudActionPreviewer
+            title: qsTr("Preview") + Retranslate.onLanguageChanged
             imageSource: "asset:///images/ics/4-collections-cloud_newLabel81.png"
-            enabled: false
             ActionBar.placement: ActionBarPlacement.OnBar
             onTriggered: {
                 app.invokeBoundODSPreviewer(picker.selectedFile)
+                resetFields()
+            }
+        },
+        ActionItem {
+            id: cloudActionComposer
+            title: qsTr("Compose") + Retranslate.onLanguageChanged
+            imageSource: "asset:///images/ics/4-collections-cloud_newLabel81.png"
+            ActionBar.placement: ActionBarPlacement.OnBar
+            onTriggered: {
+                app.invokeBoundODSComposer(picker.selectedFile)
+                resetFields()
+            }
+        },
+        InvokeActionItem {
+            id: openAction
+            ActionBar.placement: ActionBarPlacement.OnBar
+            query {
+                // little trick: always use same mime type, because query needs a mime type
+                // ODS then takes a look at file path suffix to see if file is supported
+                mimeType: "image/png"
+                invokeActionId: "bb.action.OPEN"
+                invokeTargetId: "io.ods.bb10.invoke"
+            }
+            onTriggered: {
+                // we dont need the file - the app is only opened
             }
         },
         InvokeActionItem {
             id: shareAction
-            enabled: false
             ActionBar.placement: ActionBarPlacement.OnBar
             query {
                 // little trick: always use same mime type, because query needs a mime type
@@ -68,19 +89,7 @@ Page {
                 // next trick: all properties from query are read-only
                 // but we can use the data, which is read-write
                 data = picker.selectedFile
-            }
-        },
-        InvokeActionItem {
-            ActionBar.placement: ActionBarPlacement.OnBar
-            query {
-                // little trick: always use same mime type, because query needs a mime type
-                // ODS then takes a look at file path suffix to see if file is supported
-                mimeType: "image/png"
-                invokeActionId: "bb.action.OPEN"
-                invokeTargetId: "io.ods.bb10.invoke"
-            }
-            onTriggered: {
-                // we dont need the file - the app is only opened
+                resetFields()
             }
         },
         ActionItem {
@@ -132,23 +141,60 @@ Page {
             }
         }
     ]
-    titleBar: {
-        title: qsTr("Invoke ODS as Card vs App") + Retranslate.onLanguageChanged
+    titleBar: TitleBar {
+        id: titleBarId
+        title: qsTr("Invoke ODS as APP vs Card") + Retranslate.onLanguageChanged
+        visibility: ChromeVisibility.Visible
     }
     Container {
         layout: DockLayout {
         }
         TextArea {
+            id: theNextStep
+            editable: false
+            text: ""
+            textStyle.base: SystemDefaults.TextStyles.BodyText
+            verticalAlignment: VerticalAlignment.Top
+            horizontalAlignment: HorizontalAlignment.Left
+            translationX: 80
+            translationY: 40
+        }
+        TextArea {
             id: fileLabel
             editable: false
-            text: qsTr("[selected file]")
+            visible: false
+            text: ""
             textStyle.base: SystemDefaults.TextStyles.BodyText
-            verticalAlignment: VerticalAlignment.Center
-            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Top
+            horizontalAlignment: HorizontalAlignment.Left
+            translationX: 80
+            translationY: 360
         }
+    }
+    function fileActions() {
+        theNextStep.text = qsTr("You have selected the file below.\nEmbed the card from ODS:\nCloud Action (Previewer/Composer)\nor Share Action (Previewer)") + Retranslate.onLanguageChanged
+        fileLabel.text = picker.selectedFile
+        fileLabel.visible = true
+        page.addAction(cloudActionPreviewer,0)
+        page.addAction(cloudActionComposer,1)
+        page.addAction(shareAction,2)
+        //cloudActionPreviewer.enabled = true
+        //cloudActionComposer.enabled = true
+        //shareAction.enabled = true
+    }
+    function resetFields() {
+        fileLabel.visible = false
+        page.removeAction(cloudActionPreviewer)
+        page.removeAction(cloudActionComposer)
+        page.removeAction(shareAction)
+        //cloudActionPreviewer.enabled = false
+        //cloudActionComposer.enabled = false
+        //shareAction.enabled = false
+        theNextStep.text = qsTr("Select a file from Overflow Menu:\n\nDocument, Image,\nVideo or Music)\n\nor invoke ODS as Application:\nOpen in... Action") + Retranslate.onLanguageChanged
     }
     onCreationCompleted: {
         // support all orientations
         OrientationSupport.supportedDisplayOrientation = SupportedDisplayOrientation.All;
+        resetFields();
     }
 }

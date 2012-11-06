@@ -86,6 +86,7 @@
     <!--  The icon for the application, which should be 86x86. -->
     <icon>
         <image></image>
+        <image>icon.png</image>
     </icon>
 
     <asset path="assets">assets</asset>
@@ -94,6 +95,7 @@
     <asset path="translations" dest="qm">
         <include name="*.qm"/>
     </asset>
+    <asset path="icon.png">icon.png</asset>
     
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>
