@@ -141,12 +141,15 @@ Page {
             }
         }
     ]
-    titleBar: TitleBar {
-        id: titleBarId
-        title: qsTr("Invoke ODS as APP vs Card") + Retranslate.onLanguageChanged
-        visibility: ChromeVisibility.Visible
-    }
     Container {
+        background: back.imagePaint
+        attachedObjects: [
+            ImagePaintDefinition {
+                id: back
+                repeatPattern: RepeatPattern.Fill
+                imageSource: "asset:///images/bg.png.amd"
+            }
+        ]
         layout: DockLayout {
         }
         ImageView {
@@ -168,29 +171,42 @@ Page {
             translationY: 10
         }
         TextArea {
+            id: titletext
+            editable: false
+            text: "File 2 ODS Cloud"
+            textStyle.color: Color.White
+            textStyle.base: SystemDefaults.TextStyles.BigText
+            verticalAlignment: VerticalAlignment.Top
+            horizontalAlignment: HorizontalAlignment.Left
+            translationX: 60
+            translationY: 20
+        }
+        TextArea {
             id: theNextStep
             editable: false
             text: ""
-            textStyle.base: SystemDefaults.TextStyles.BodyText
+            textStyle.color: Color.White
+            textStyle.base: SystemDefaults.TextStyles.TitleText
             verticalAlignment: VerticalAlignment.Top
             horizontalAlignment: HorizontalAlignment.Left
-            translationX: 80
-            translationY: 40
+            translationX: 60
+            translationY: 120
         }
         TextArea {
             id: fileLabel
             editable: false
             visible: false
             text: ""
+            textStyle.color: Color.White
             textStyle.base: SystemDefaults.TextStyles.BodyText
             verticalAlignment: VerticalAlignment.Top
             horizontalAlignment: HorizontalAlignment.Left
-            translationX: 80
-            translationY: 360
+            translationX: 60
+            translationY: 560
         }
     }
     function fileActions() {
-        theNextStep.text = qsTr("You have selected the file below.\nEmbed the card from ODS:\nCloud Action (Previewer/Composer)\nor Share Action (Previewer)") + Retranslate.onLanguageChanged
+        theNextStep.text = qsTr("You have selected the file below.\n\nEmbed the card from ODS:\n* Cloud Action\n(Previewer || Composer)\n* Share Action (Previewer)") + Retranslate.onLanguageChanged
         fileLabel.text = picker.selectedFile
         fileLabel.visible = true
         page.addAction(cloudActionPreviewer, 0)

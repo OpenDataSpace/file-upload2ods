@@ -51,20 +51,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="146"/>
-        <source>Invoke ODS as APP vs Card</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/main.qml" line="193"/>
+        <location filename="../assets/main.qml" line="209"/>
         <source>You have selected the file below.
+
 Embed the card from ODS:
-Cloud Action (Previewer/Composer)
-or Share Action (Previewer)</source>
+* Cloud Action
+(Previewer || Composer)
+* Share Action (Previewer)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="211"/>
+        <location filename="../assets/main.qml" line="227"/>
         <source>Select a file from Overflow Menu:
 
 Document, Image,
