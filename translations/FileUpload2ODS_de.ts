@@ -6,7 +6,7 @@
     <message>
         <location filename="../assets/main.qml" line="32"/>
         <source>File Picker</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dateiauswahl</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="46"/>
@@ -22,33 +22,33 @@
         <location filename="../assets/main.qml" line="96"/>
         <location filename="../assets/main.qml" line="100"/>
         <source>Select Document</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dokument auswählen</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="108"/>
         <source>Select | Capture Image</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Foto auswählen | aufnehmen</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="112"/>
         <source>Select Image</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Foto auswählen</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="120"/>
         <source>Select | Capture Video</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Video auswählen | aufnehmen</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="124"/>
         <source>Select Video</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Video auswählen</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="132"/>
         <location filename="../assets/main.qml" line="136"/>
         <source>Select Music</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Audiodatei auswählen</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="209"/>
@@ -58,7 +58,12 @@ Embed the card from ODS:
 * Cloud Action
 (Previewer || Composer)
 * Share Action (Previewer)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sie haben die unten gezeigte Datei gewählt.
+
+ODS Karte einbetten:
+* Cloud Aktion
+(Previewer || Composer)
+* Freigeben Aktion (Previewer)</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="227"/>
@@ -69,7 +74,13 @@ Video or Music)
 
 or invoke ODS as Application:
 Open in... Action</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Datei auswählen (Überlaufmenu):
+
+Dokument, Foto,
+Video oder Audio
+
+oder ODS als Anwendung öffnen
+Öffnen in... Aktion</translation>
     </message>
 </context>
 </TS>

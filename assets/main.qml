@@ -202,7 +202,7 @@ Page {
             verticalAlignment: VerticalAlignment.Top
             horizontalAlignment: HorizontalAlignment.Left
             translationX: 60
-            translationY: 560
+            translationY: 580
         }
     }
     function fileActions() {
