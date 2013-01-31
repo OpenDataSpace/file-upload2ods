@@ -43,21 +43,11 @@ Page {
     actions: [
         ActionItem {
             id: cloudActionPreviewer
-            title: qsTr("Preview") + Retranslate.onLanguageChanged
+            title: qsTr("ODS Upload") + Retranslate.onLanguageChanged
             imageSource: "asset:///images/ics/4-collections-cloud_newLabel81.png"
             ActionBar.placement: ActionBarPlacement.OnBar
             onTriggered: {
-                app.invokeBoundODSPreviewer(picker.selectedFile)
-                resetFields()
-            }
-        },
-        ActionItem {
-            id: cloudActionComposer
-            title: qsTr("Compose") + Retranslate.onLanguageChanged
-            imageSource: "asset:///images/ics/4-collections-cloud_newLabel81.png"
-            ActionBar.placement: ActionBarPlacement.OnBar
-            onTriggered: {
-                app.invokeBoundODSComposer(picker.selectedFile)
+                app.invokeBoundODSUpload(picker.selectedFile)
                 resetFields()
             }
         },
@@ -206,7 +196,7 @@ Page {
         }
     }
     function fileActions() {
-        theNextStep.text = qsTr("You have selected the file below.\n\nEmbed the card from ODS:\n* Cloud Action\n(Previewer || Composer)\n* Share Action (Previewer)") + Retranslate.onLanguageChanged
+        theNextStep.text = qsTr("File selected ... upload") + Retranslate.onLanguageChanged
         fileLabel.text = picker.selectedFile
         fileLabel.visible = true
         page.addAction(cloudActionPreviewer, 0)
@@ -224,7 +214,7 @@ Page {
         //cloudActionPreviewer.enabled = false
         //cloudActionComposer.enabled = false
         //shareAction.enabled = false
-        theNextStep.text = qsTr("Select a file from Overflow Menu:\n\nDocument, Image,\nVideo or Music)\n\nor invoke ODS as Application:\nOpen in... Action") + Retranslate.onLanguageChanged
+        theNextStep.text = qsTr("Select a file from Overflow Menu:\n\nDocument, Image,\nVideo or Music)\n\nthen Upload to ODS") + Retranslate.onLanguageChanged
     }
     function onGreen() {
         redImage.visible = false

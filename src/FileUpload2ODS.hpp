@@ -44,14 +44,8 @@ public:
 	 * as Previewer
 	 */
 	Q_INVOKABLE
-	void invokeBoundODSPreviewer(QString data);
+	void invokeBoundODSUpload(QString data);
 
-	/**
-	 * uses Invokation Framework to Invoke embedded Card
-	 * as Composer
-	 */
-	Q_INVOKABLE
-	void invokeBoundODSComposer(QString data);
 
 Q_SIGNALS:
 

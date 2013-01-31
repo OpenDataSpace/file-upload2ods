@@ -62,17 +62,10 @@ FileUpload2ODS::FileUpload2ODS(bb::cascades::Application *app) :
 	app->setScene(root);
 }
 
-void FileUpload2ODS::invokeBoundODSPreviewer(QString data) {
+void FileUpload2ODS::invokeBoundODSUpload(QString data) {
 	InvokeRequest cardRequest;
 	cardRequest.setData(data.toLatin1());
-	cardRequest.setTarget("io.ods.bb10.card.upload.previewer");
-	m_invokeManager->invoke(cardRequest);
-}
-
-void FileUpload2ODS::invokeBoundODSComposer(QString data) {
-	InvokeRequest cardRequest;
-	cardRequest.setData(data.toLatin1());
-	cardRequest.setTarget("io.ods.bb10.card.upload.composer");
+	cardRequest.setTarget("io.ods.bb10.card.upload");
 	m_invokeManager->invoke(cardRequest);
 }
 
