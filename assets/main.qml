@@ -194,7 +194,7 @@ Page {
             verticalAlignment: VerticalAlignment.Top
             horizontalAlignment: HorizontalAlignment.Left
             translationX: 60
-            translationY: 580
+            translationY: 380
         }
     }
     function fileActions() {
