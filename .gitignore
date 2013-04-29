@@ -12,5 +12,6 @@
 *.a
 
 /.settings/
+/config.pri
 /arm/
 /x86/

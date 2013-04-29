@@ -36,6 +36,7 @@ Page {
             sortOrder: FilePickerSortOrder.Default
             onFileSelected: {
                 selectedFile = selectedFiles[0]
+                picker.close()
                 fileActions()
             }
         }
@@ -79,6 +80,7 @@ Page {
                 // next trick: all properties from query are read-only
                 // but we can use the data, which is read-write
                 data = picker.selectedFile
+                picker.close()
                 resetFields()
             }
         },
@@ -200,8 +202,7 @@ Page {
         fileLabel.text = picker.selectedFile
         fileLabel.visible = true
         page.addAction(cloudActionPreviewer, 0)
-        page.addAction(cloudActionComposer, 1)
-        page.addAction(shareAction, 2)
+        // page.addAction(shareAction, 2)
         //cloudActionPreviewer.enabled = true
         //cloudActionComposer.enabled = true
         //shareAction.enabled = true
@@ -209,8 +210,7 @@ Page {
     function resetFields() {
         fileLabel.visible = false
         page.removeAction(cloudActionPreviewer)
-        page.removeAction(cloudActionComposer)
-        page.removeAction(shareAction)
+        // page.removeAction(shareAction)
         //cloudActionPreviewer.enabled = false
         //cloudActionComposer.enabled = false
         //shareAction.enabled = false
